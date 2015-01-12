@@ -7,6 +7,17 @@ module Importers
         @row = row
       end
 
+      def inspect
+        attributes = [
+          :identifier, :status, :producer, :wine,
+          :country, :region, :subregion,
+          :colour, :type, :designation, :classification,
+          :reference, :date_updated
+        ].map { |k| "#{k}=#{(send k).inspect}" }
+
+        "<Row:#{object_id} #{attributes.join(', ')}>"
+      end
+
       def identifier
         extract_lwin_identifier(0)
       end
