@@ -14,6 +14,8 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
+gem 'spreadsheet'
+
 group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
