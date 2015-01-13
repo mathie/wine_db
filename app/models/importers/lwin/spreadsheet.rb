@@ -27,7 +27,7 @@ module Importers
 
       def each
         data_worksheet.each(1) do |raw_row|
-          yield Wine.from_row(Row.new(raw_row))
+          yield LwinWine.from_row(Row.new(raw_row))
         end
       end
 

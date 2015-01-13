@@ -1,6 +1,6 @@
 module Importers
   module Lwin
-    class Wine
+    class LwinWine
       include ActiveModel::Validations
       include ActiveModel::AttributeMethods
 

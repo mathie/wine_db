@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Importers
   module Lwin
-    RSpec.describe Wine do
+    RSpec.describe LwinWine do
       describe '#from_row' do
         subject {  }
 

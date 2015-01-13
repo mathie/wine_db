@@ -1,6 +1,6 @@
 module Importers
   module Lwin
-    class DeletedWine < Wine
+    class DeletedWine < LwinWine
     end
   end
 end
