@@ -1,6 +1,7 @@
 class Wine < ActiveRecord::Base
-  enum colour: [ :unknown, :red, :rose, :white ]
+  enum colour: [ :unknown_colour, :red, :rose, :white ]
   enum wine_type: [
+    :unknown_wine_type,
     :armagnac,
     :cognac,
     :eaux_vie,
