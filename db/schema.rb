@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20150113155025) do
 
   add_index "locations", ["parent_id", "name"], name: "index_locations_on_parent_id_and_name", unique: true, using: :btree
 
-  create_table "producers", force: :cascade do |t|
+  create_table "producers", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
