@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113155025) do
+ActiveRecord::Schema.define(version: 20150113173000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20150113155025) do
 
   add_index "locations", ["parent_id", "name"], name: "index_locations_on_parent_id_and_name", unique: true, using: :btree
 
-  create_table "producers", force: :cascade do |t|
+  create_table "producers", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,5 +43,19 @@ ActiveRecord::Schema.define(version: 20150113155025) do
 
   add_index "producers", ["name"], name: "index_producers_on_name", unique: true, using: :btree
 
+  create_table "wines", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name",                          null: false
+    t.integer  "colour",            default: 0, null: false
+    t.integer  "wine_type",         default: 0, null: false
+    t.uuid     "producer_id"
+    t.uuid     "location_id",                   null: false
+    t.uuid     "classification_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
   add_foreign_key "locations", "locations", column: "parent_id", on_update: :restrict, on_delete: :restrict
+  add_foreign_key "wines", "classifications", on_update: :restrict, on_delete: :restrict
+  add_foreign_key "wines", "locations", on_update: :restrict, on_delete: :restrict
+  add_foreign_key "wines", "producers", on_update: :restrict, on_delete: :restrict
 end
