@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112172627) do
+ActiveRecord::Schema.define(version: 20150113155025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20150112172627) do
 
   add_index "classifications", ["designation", "classification"], name: "index_classifications_on_designation_and_classification", unique: true, using: :btree
 
+  create_table "locations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.uuid     "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "locations", ["parent_id", "name"], name: "index_locations_on_parent_id_and_name", unique: true, using: :btree
+
   create_table "producers", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -34,4 +43,5 @@ ActiveRecord::Schema.define(version: 20150112172627) do
 
   add_index "producers", ["name"], name: "index_producers_on_name", unique: true, using: :btree
 
+  add_foreign_key "locations", "locations", column: "parent_id", on_update: :restrict, on_delete: :restrict
 end
