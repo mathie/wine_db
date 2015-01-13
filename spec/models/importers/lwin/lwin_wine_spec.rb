@@ -4,8 +4,6 @@ module Importers
   module Lwin
     RSpec.describe LwinWine do
       describe '#from_row' do
-        subject {  }
-
         context 'for a live wine' do
           let!(:wine_class) { class_spy('LiveWine').as_stubbed_const }
           let(:row) { instance_spy('Row', status: :live) }
