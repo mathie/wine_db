@@ -3,5 +3,5 @@ class Classification < ActiveRecord::Base
 
   validates :designation, presence: true
 
-  validates_uniqueness_of [:classification, :designation]
+  validates_uniqueness_of :classification, scope: :designation
 end

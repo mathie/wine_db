@@ -5,7 +5,7 @@ class Location < ActiveRecord::Base
 
   validates :name, presence: true
 
-  validates_uniqueness_of [:parent_id, :name]
+  validates_uniqueness_of :name, scope: :parent_id
 
   def self.find_or_create_by_tuple(country, region = nil, subregion = nil)
     country = find_or_create_by(name: country, parent_id: nil)

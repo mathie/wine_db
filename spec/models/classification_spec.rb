@@ -29,7 +29,6 @@ RSpec.describe Classification do
       duplicate = factory
       expect(duplicate).not_to be_valid
       expect(duplicate.errors[:classification]).to include(/has already been taken/)
-      expect(duplicate.errors[:designation]).to include(/has already been taken/)
     end
   end
 end
