@@ -1,0 +1,27 @@
+<% content_for :title, 'L-WIN Identifiers' %>
+
+<%= paginate @lwin_identifiers %>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Identifier</th>
+      <th>Status</th>
+      <th>Wine</th>
+      <th>Last Updated</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lwin_identifiers.each do |lwin_identifier| %>
+      <%= content_tag_for :tr, lwin_identifier do %>
+        <td><%= lwin_identifier.identifier %></td>
+        <td><%= lwin_identifier.status.to_s.humanize %></td>
+        <td><%= lwin_identifier.wine.present? ? lwin_identifier.wine.name : '' %></td>
+        <td><%= lwin_identifier.identifier_updated_at.to_s(:long) %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @lwin_identifiers %>

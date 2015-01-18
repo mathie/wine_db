@@ -32,6 +32,12 @@
             <% else %>
               <li><%= link_to 'Home', root_path %></li>
             <% end %>
+
+            <% if request.path == lwin_identifiers_path %>
+              <li class="active"><%= link_to 'Identifiers', lwin_identifiers_path %></li>
+            <% else %>
+              <li><%= link_to 'Identifiers', lwin_identifiers_path %></li>
+            <% end %>
           </ul>
         </div>
       </div>
