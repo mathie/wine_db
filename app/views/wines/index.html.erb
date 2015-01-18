@@ -17,6 +17,18 @@
     <li><%= link_to 'Sub-locations', location_locations_path(@location) %></li>
     <li class="active"><%= link_to 'Wines', location_wines_path(@location) %>
   </ul>
+<% elsif @producer %>
+  <% content_for :title, "#{@producer.name}: Wines" %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Producers', producers_path %></li>
+    <li class="active"><%= link_to @producer.name, @producer %></li>
+  </ol>
+
+  <ul class="nav nav-tabs">
+    <li><%= link_to 'Details', @producer %></li>
+    <li class="active"><%= link_to 'Wines', producer_wines_path(@producer) %>
+  </ul>
 <% else %>
   <% content_for :title, 'All wines' %>
 <% end %>

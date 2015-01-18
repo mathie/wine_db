@@ -1,5 +1,15 @@
 <% content_for :title, @producer.name %>
 
+<ol class="breadcrumb">
+  <li><%= link_to 'Producers', producers_path %></li>
+  <li class="active"><%= link_to @producer.name, @producer %></li>
+</ol>
+
+<ul class="nav nav-tabs">
+  <li class="active"><%= link_to 'Details', @producer %></li>
+  <li><%= link_to 'Wines', producer_wines_path(@producer) %>
+</ul>
+
 <dl>
   <dt>Name</dt>
   <dd><%= @producer.name %></dd>
