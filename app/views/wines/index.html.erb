@@ -1,4 +1,25 @@
-<% content_for :title, 'All wines' %>
+<% if @location %>
+  <% content_for :title, "#{@location.title}: Wines" %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Countries', locations_path %></li>
+    <% if @location.parent.try(:parent).present? %>
+      <li><%= link_to @location.parent.parent.name, @location.parent.parent %></li>
+    <% end %>
+    <% if @location.parent.present? %>
+      <li><%= link_to @location.parent.name, @location.parent %></li>
+    <% end %>
+    <li class="active"><%= link_to @location.name, @location %></li>
+  </ol>
+
+  <ul class="nav nav-tabs">
+    <li><%= link_to 'Details', @location %></li>
+    <li><%= link_to 'Sub-locations', location_locations_path(@location) %></li>
+    <li class="active"><%= link_to 'Wines', location_wines_path(@location) %>
+  </ul>
+<% else %>
+  <% content_for :title, 'All wines' %>
+<% end %>
 
 <%= paginate @wines %>
 
