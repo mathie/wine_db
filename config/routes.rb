@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :locations, only: [ :index, :show ] do
     resources :locations, shallow: true, only: [ :index ]
   end
+  resources :wines, only: [ :index, :show ]
 
   root to: 'pages#index'
 end

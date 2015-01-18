@@ -12,6 +12,6 @@
 
   <% if @lwin_identifier.wine.present? %>
     <dt>Wine</dt>
-    <dd><%= @lwin_identifier.wine.name %></dd>
+    <dd><%= link_to @lwin_identifier.wine.name, @lwin_identifier.wine %></dd>
   <% end %>
 </dl>

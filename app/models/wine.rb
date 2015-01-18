@@ -22,9 +22,22 @@ class Wine < ActiveRecord::Base
   belongs_to :producer
   belongs_to :location
   belongs_to :classification
+  has_many :lwin_identifiers
 
   validates :name, presence: true, uniqueness: { scope: :producer_id }
   validates :colour, presence: true
   validates :wine_type, presence: true
   validates :location, presence: true
+
+  def self.paginated(page)
+    order(:name).page(page)
+  end
+
+  def canonical_identifier
+    lwin_identifiers.live.take!
+  end
+
+  def combined_identifiers
+    lwin_identifiers.combined
+  end
 end

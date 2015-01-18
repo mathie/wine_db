@@ -39,6 +39,12 @@
               <li><%= link_to 'Identifiers', lwin_identifiers_path %></li>
             <% end %>
 
+            <% if request.path == wines_path %>
+              <li class="active"><%= link_to 'Wines', wines_path %></li>
+            <% else %>
+              <li><%= link_to 'Wines', wines_path %></li>
+            <% end %>
+
             <% if request.path == producers_path %>
               <li class="active"><%= link_to 'Producers', producers_path %></li>
             <% else %>
