@@ -1,0 +1,23 @@
+<% content_for :title, "Producers" %>
+
+<%= paginate @producers %>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Number of wines</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @producers.each do |producer| %>
+      <%= content_tag_for :tr, producer do %>
+        <td><%= link_to producer.name, producer %></td>
+        <td><%= number_to_human(producer.wines.count) %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @producers %>

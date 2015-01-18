@@ -1,0 +1,9 @@
+<% content_for :title, @producer.name %>
+
+<dl>
+  <dt>Name</dt>
+  <dd><%= @producer.name %></dd>
+
+  <dt>Number of wines</dt>
+  <dd><%= @producer.wines.count %></dd>
+</dl>
