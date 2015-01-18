@@ -1,5 +1,11 @@
 <% content_for :title, "L-WIN Identifier #{@lwin_identifier.identifier}" %>
 
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li><%= link_to 'Identifiers', lwin_identifiers_path %></li>
+  <li class="active"><%= link_to @lwin_identifier.identifier, lwin_identifier_path(@lwin_identifier) %></li>
+</ol>
+
 <dl>
   <dt>Identifier</dt>
   <dd><%= @lwin_identifier.identifier %></dd>

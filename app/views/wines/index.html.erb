@@ -2,6 +2,7 @@
   <% content_for :title, "#{@location.title}: Wines" %>
 
   <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
     <li><%= link_to 'Countries', locations_path %></li>
     <% if @location.parent.try(:parent).present? %>
       <li><%= link_to @location.parent.parent.name, @location.parent.parent %></li>
@@ -21,6 +22,7 @@
   <% content_for :title, "#{@producer.name}: Wines" %>
 
   <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
     <li><%= link_to 'Producers', producers_path %></li>
     <li class="active"><%= link_to @producer.name, @producer %></li>
   </ol>
@@ -33,6 +35,7 @@
   <% content_for :title, "#{@classification.title}: Wines" %>
 
   <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
     <li><%= link_to 'Classifications', classifications_path %></li>
     <li class="active"><%= link_to @classification.title, @classification %></li>
   </ol>
@@ -45,6 +48,7 @@
   <% content_for :title, 'All wines' %>
 
   <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
     <li class="active"><%= link_to 'Wines', wines_path %></li>
   </ol>
 <% end %>

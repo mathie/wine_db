@@ -1,6 +1,7 @@
 <% content_for :title, @wine.name %>
 
 <ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
   <li><%= link_to 'Wines', wines_path %></li>
   <li class="active"><%= link_to @wine.name, @wine %></li>
 </ol>

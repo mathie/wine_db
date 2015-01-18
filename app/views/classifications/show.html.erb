@@ -1,6 +1,7 @@
 <% content_for :title, @classification.title %>
 
 <ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
   <li><%= link_to 'Classifications', classifications_path %></li>
   <li class="active"><%= link_to @classification.title, @classification %></li>
 </ol>

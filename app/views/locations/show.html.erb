@@ -1,6 +1,7 @@
 <% content_for :title, @location.title %>
 
 <ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
   <li><%= link_to 'Countries', locations_path %></li>
   <% if @location.parent.try(:parent).present? %>
     <li><%= link_to @location.parent.parent.name, @location.parent.parent %></li>

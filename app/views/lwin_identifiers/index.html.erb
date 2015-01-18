@@ -1,5 +1,10 @@
 <% content_for :title, 'L-WIN Identifiers' %>
 
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li class="active"><%= link_to 'Identifiers', lwin_identifiers_path %></li>
+</ol>
+
 <%= paginate @lwin_identifiers %>
 
 <table class="table table-striped table-bordered table-hover">
