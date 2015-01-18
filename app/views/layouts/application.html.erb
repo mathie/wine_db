@@ -44,6 +44,12 @@
             <% else %>
               <li><%= link_to 'Producers', producers_path %></li>
             <% end %>
+
+            <% if request.path == classifications_path %>
+              <li class="active"><%= link_to 'Classifications', classifications_path %></li>
+            <% else %>
+              <li><%= link_to 'Classifications', classifications_path %></li>
+            <% end %>
           </ul>
         </div>
       </div>

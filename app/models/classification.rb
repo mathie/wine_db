@@ -4,4 +4,12 @@ class Classification < ActiveRecord::Base
   validates :designation, presence: true
 
   validates_uniqueness_of :classification, scope: :designation
+
+  def self.paginated(page)
+    order(:designation, :classification).page(page)
+  end
+
+  def title
+    [ designation, classification ].compact.map(&:humanize).join(' - ')
+  end
 end

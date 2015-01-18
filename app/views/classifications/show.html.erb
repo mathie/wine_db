@@ -1,0 +1,14 @@
+<% content_for :title, @classification.title %>
+
+<dl>
+  <dt>Designation</dt>
+  <dd><%= @classification.designation.humanize %></dd>
+
+  <% if @classification.classification.present? %>
+    <dt>Classification</dt>
+    <dd><%= @classification.classification.humanize %></dd>
+  <% end %>
+
+  <dt>Number of wines</dt>
+  <dd><%= number_to_human @classification.wines.count %></dd>
+</dl>
