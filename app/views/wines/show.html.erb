@@ -1,0 +1,41 @@
+<% content_for :title, @wine.name %>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li><%= link_to 'Wines', wines_path %></li>
+  <li class="active"><%= link_to @wine.name, @wine %></li>
+</ol>
+
+<dl>
+  <dt>Name</dt>
+  <dd><%= @wine.name %></dd>
+
+  <dt>Colour</dt>
+  <dd><%= @wine.colour.to_s.humanize %></dd>
+
+  <dt>Type</dt>
+  <dd><%= @wine.wine_type.to_s.humanize %></dd>
+
+  <% if @wine.producer.present? %>
+    <dt>Producer</dt>
+    <dd><%= link_to @wine.producer.name, @wine.producer %></dd>
+  <% end %>
+
+  <dt>Location</dt>
+  <dd><%= link_to @wine.location.title, @wine.location %></dd>
+
+  <% if @wine.classification.present? %>
+    <dt>Classification</dt>
+    <dd><%= link_to @wine.classification.title, @wine.classification %></dd>
+  <% end %>
+
+  <dd>Canonical identifier</dd>
+  <dt><%= link_to @wine.canonical_identifier.identifier, @wine.canonical_identifier %></dt>
+
+  <% if @wine.combined_identifiers.present? %>
+    <dd>Combined identifiers</dd>
+    <dt>
+      <%= @wine.combined_identifiers.map { |identifier| link_to identifier.identifier, identifier }.to_sentence %>
+    </dt>
+  <% end %>
+</dl>

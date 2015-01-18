@@ -20,4 +20,16 @@ class Location < ActiveRecord::Base
       country
     end
   end
+
+  def self.paginated(page)
+    order(:name).page(page)
+  end
+
+  def title
+    if parent.present?
+      [ parent.title, name ].compact.join(' - ')
+    else
+      name
+    end
+  end
 end

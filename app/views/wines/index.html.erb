@@ -1,0 +1,98 @@
+<% if @location %>
+  <% content_for :title, "#{@location.title}: Wines" %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Countries', locations_path %></li>
+    <% if @location.parent.try(:parent).present? %>
+      <li><%= link_to @location.parent.parent.name, @location.parent.parent %></li>
+    <% end %>
+    <% if @location.parent.present? %>
+      <li><%= link_to @location.parent.name, @location.parent %></li>
+    <% end %>
+    <li class="active"><%= link_to @location.name, @location %></li>
+  </ol>
+
+  <ul class="nav nav-tabs">
+    <li><%= link_to 'Details', @location %></li>
+    <li><%= link_to 'Sub-locations', location_locations_path(@location) %></li>
+    <li class="active"><%= link_to 'Wines', location_wines_path(@location) %>
+  </ul>
+<% elsif @producer %>
+  <% content_for :title, "#{@producer.name}: Wines" %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Producers', producers_path %></li>
+    <li class="active"><%= link_to @producer.name, @producer %></li>
+  </ol>
+
+  <ul class="nav nav-tabs">
+    <li><%= link_to 'Details', @producer %></li>
+    <li class="active"><%= link_to 'Wines', producer_wines_path(@producer) %>
+  </ul>
+<% elsif @classification %>
+  <% content_for :title, "#{@classification.title}: Wines" %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Classifications', classifications_path %></li>
+    <li class="active"><%= link_to @classification.title, @classification %></li>
+  </ol>
+
+  <ul class="nav nav-tabs">
+    <li><%= link_to 'Details', @classification %></li>
+    <li class="active"><%= link_to 'Wines', classification_wines_path(@classification) %>
+  </ul>
+<% else %>
+  <% content_for :title, 'All wines' %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li class="active"><%= link_to 'Wines', wines_path %></li>
+  </ol>
+<% end %>
+
+<%= paginate @wines %>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Identifier</th>
+      <th>Name</th>
+      <th>Colour</th>
+      <th>Type</th>
+      <th>Producer</th>
+      <th>Location</th>
+      <th>Classification</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wines.each do |wine| %>
+      <%= content_tag_for :tr, wine do %>
+        <td><%= link_to wine.canonical_identifier.identifier, wine.canonical_identifier %></td>
+        <td><%= link_to wine.name, wine %></td>
+        <td><%= wine.colour.to_s.humanize %></td>
+        <td><%= wine.wine_type.to_s.humanize %></td>
+        <td>
+          <% if wine.producer.present? %>
+            <%= link_to wine.producer.name, wine.producer %>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+        <td><%= link_to wine.location.title, wine.location %></td>
+        <td>
+          <% if wine.classification.present? %>
+            <%= link_to wine.classification.title, wine.classification %>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @wines %>

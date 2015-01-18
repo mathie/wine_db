@@ -1,0 +1,38 @@
+<%= content_for :title, 'Classifications' %>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li class="active"><%= link_to 'Classifications', classifications_path %></li>
+</ol>
+
+<%= paginate @classifications %>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Designation</th>
+      <th>Classification</th>
+      <th>Number of wines</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @classifications.each do |classification| %>
+      <%= content_tag_for :tr, classification do %>
+        <td>
+          <%= link_to classification.designation.humanize, classification %>
+        </td>
+        <td>
+          <% if classification.classification.present? %>
+            <%= link_to classification.classification.humanize, classification %>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+        <td><%= number_to_human classification.wines.count %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @classifications %>
