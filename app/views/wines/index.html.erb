@@ -29,6 +29,18 @@
     <li><%= link_to 'Details', @producer %></li>
     <li class="active"><%= link_to 'Wines', producer_wines_path(@producer) %>
   </ul>
+<% elsif @classification %>
+  <% content_for :title, "#{@classification.title}: Wines" %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Classifications', classifications_path %></li>
+    <li class="active"><%= link_to @classification.title, @classification %></li>
+  </ol>
+
+  <ul class="nav nav-tabs">
+    <li><%= link_to 'Details', @classification %></li>
+    <li class="active"><%= link_to 'Wines', classification_wines_path(@classification) %>
+  </ul>
 <% else %>
   <% content_for :title, 'All wines' %>
 

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     resources :wines, shallow: true, only: [ :index ]
   end
 
-  resources :classifications, only: [ :index, :show ]
+  resources :classifications, only: [ :index, :show ] do
+    resources :wines, shallow: true, only: [ :index ]
+  end
 
   resources :locations, only: [ :index, :show ] do
     resources :locations, shallow: true, only: [ :index ]

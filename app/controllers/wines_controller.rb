@@ -15,6 +15,9 @@ class WinesController < ApplicationController
     elsif producer_id = params[:producer_id]
       @producer = Producer.find(producer_id)
       @producer.wines
+    elsif classification_id = params[:classification_id]
+      @classification = Classification.find(classification_id)
+      @classification.wines
     else
       Wine
     end
