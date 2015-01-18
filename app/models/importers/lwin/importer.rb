@@ -30,33 +30,34 @@ module Importers
             when CombinedWine
               combined_wines << lwin_wine
             when LiveWine
+              location = Location.find_or_create_by_tuple(lwin_wine.country, lwin_wine.region, lwin_wine.subregion)
+              producer = if lwin_wine.producer.present?
+                Producer.find_or_create_by!(name: lwin_wine.producer)
+              else
+                nil
+              end
+
+              classification = if lwin_wine.designation.present?
+                Classification.find_or_create_by!(designation: lwin_wine.designation, classification: lwin_wine.classification)
+              else
+                nil
+              end
+
+              wine_type = case lwin_wine.type
+              when :fortfied
+                :fortified
+              when nil
+                :unknown_wine_type
+              else
+                lwin_wine.type
+              end
+
               if identifier = LwinIdentifier.where(identifier: lwin_wine.identifier).take
                 identifier.update!(
                   identifier: lwin_wine.identifier,
                   status: :live,
                   identifier_updated_at: lwin_wine.date_updated
                 )
-
-                location = Location.find_or_create_by_tuple(lwin_wine.country, lwin_wine.region, lwin_wine.subregion)
-                producer = if lwin_wine.producer.present?
-                  Producer.find_or_create_by!(name: lwin_wine.producer)
-                else
-                  nil
-                end
-                classification = if lwin_wine.designation.present?
-                  Classification.find_or_create_by!(designation: lwin_wine.designation, classification: lwin_wine.classification)
-                else
-                  nil
-                end
-
-                wine_type = case lwin_wine.type
-                when :fortfied
-                  :fortified
-                when nil
-                  :unknown_wine_type
-                else
-                  lwin_wine.type
-                end
 
                 identifier.wine.update!(
                   name: lwin_wine.wine || producer.try(:name),
@@ -67,27 +68,6 @@ module Importers
                   classification: classification
                 )
               else
-                location = Location.find_or_create_by_tuple(lwin_wine.country, lwin_wine.region, lwin_wine.subregion)
-                producer = if lwin_wine.producer.present?
-                  Producer.find_or_create_by!(name: lwin_wine.producer)
-                else
-                  nil
-                end
-                classification = if lwin_wine.designation.present?
-                  Classification.find_or_create_by!(designation: lwin_wine.designation, classification: lwin_wine.classification)
-                else
-                  nil
-                end
-
-                wine_type = case lwin_wine.type
-                when :fortfied
-                  :fortified
-                when nil
-                  :unknown_wine_type
-                else
-                  lwin_wine.type
-                end
-
                 wine = Wine.create!(
                   name: lwin_wine.wine || producer.try(:name),
                   colour: lwin_wine.colour || :unknown_colour,
