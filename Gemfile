@@ -15,6 +15,7 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
 gem 'spreadsheet'
+gem 'kaminari'
 
 group :development, :test do
   gem 'spring'
