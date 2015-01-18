@@ -20,4 +20,8 @@ class Location < ActiveRecord::Base
       country
     end
   end
+
+  def self.paginated(page, parent_id = nil)
+    where(parent_id: parent_id).order(:name).page(page)
+  end
 end

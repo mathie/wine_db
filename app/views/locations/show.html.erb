@@ -1,0 +1,9 @@
+<% content_for :title, @location.name %>
+
+<dl>
+  <dt>Name</dt>
+  <dd><%= @location.name %></dd>
+
+  <dt>Number of wines</dt>
+  <dd><%= number_to_human @location.wines.count %></dd>
+</dl>

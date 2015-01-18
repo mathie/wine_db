@@ -50,6 +50,12 @@
             <% else %>
               <li><%= link_to 'Classifications', classifications_path %></li>
             <% end %>
+
+            <% if request.path == locations_path %>
+              <li class="active"><%= link_to 'Locations', locations_path %></li>
+            <% else %>
+              <li><%= link_to 'Locations', locations_path %></li>
+            <% end %>
           </ul>
         </div>
       </div>
