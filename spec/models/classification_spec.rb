@@ -9,15 +9,15 @@ RSpec.describe Classification do
   end
 
   describe 'validations' do
-    it 'requires a classification' do
-      classification = factory(classification: nil)
+    it 'requires a designation' do
+      classification = factory(designation: nil)
 
       expect(classification).not_to be_valid
-      expect(classification.errors[:classification]).to include(/can't be blank/)
+      expect(classification.errors[:designation]).to include(/can't be blank/)
     end
 
-    it 'does not require a designation' do
-      classification = factory(designation: nil)
+    it 'does not require a classification' do
+      classification = factory(classification: nil)
 
       expect(classification).to be_valid
     end
@@ -29,7 +29,6 @@ RSpec.describe Classification do
       duplicate = factory
       expect(duplicate).not_to be_valid
       expect(duplicate.errors[:classification]).to include(/has already been taken/)
-      expect(duplicate.errors[:designation]).to include(/has already been taken/)
     end
   end
 end
