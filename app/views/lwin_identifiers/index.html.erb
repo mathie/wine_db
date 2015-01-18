@@ -15,7 +15,7 @@
   <tbody>
     <% @lwin_identifiers.each do |lwin_identifier| %>
       <%= content_tag_for :tr, lwin_identifier do %>
-        <td><%= lwin_identifier.identifier %></td>
+        <td><%= link_to lwin_identifier.identifier, lwin_identifier %></td>
         <td><%= lwin_identifier.status.to_s.humanize %></td>
         <td><%= lwin_identifier.wine.present? ? lwin_identifier.wine.name : '' %></td>
         <td><%= lwin_identifier.identifier_updated_at.to_s(:long) %></td>

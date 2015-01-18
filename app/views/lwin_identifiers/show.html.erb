@@ -1,0 +1,17 @@
+<% content_for :title, "L-WIN Identifier #{@lwin_identifier.identifier}" %>
+
+<dl>
+  <dt>Identifier</dt>
+  <dd><%= @lwin_identifier.identifier %></dd>
+
+  <dt>Status</dt>
+  <dd><%= @lwin_identifier.status.to_s.humanize %></dd>
+
+  <dt>Last Updated</dt>
+  <dd><%= @lwin_identifier.identifier_updated_at.to_s(:long) %></dd>
+
+  <% if @lwin_identifier.wine.present? %>
+    <dt>Wine</dt>
+    <dd><%= @lwin_identifier.wine.name %></dd>
+  <% end %>
+</dl>
