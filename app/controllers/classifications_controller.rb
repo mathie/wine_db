@@ -1,6 +1,6 @@
 class ClassificationsController < ApplicationController
   def index
-    @classifications = Classification.paginated(params[:page])
+    @classifications = Classification.paginated(page)
   end
 
   def show

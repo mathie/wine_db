@@ -1,6 +1,6 @@
 class ProducersController < ApplicationController
   def index
-    @producers = Producer.paginated(params[:page])
+    @producers = Producer.paginated(page)
   end
 
   def show
