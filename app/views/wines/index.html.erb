@@ -31,6 +31,10 @@
   </ul>
 <% else %>
   <% content_for :title, 'All wines' %>
+
+  <ol class="breadcrumb">
+    <li class="active"><%= link_to 'Wines', wines_path %></li>
+  </ol>
 <% end %>
 
 <%= paginate @wines %>
