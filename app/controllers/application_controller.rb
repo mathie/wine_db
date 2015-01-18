@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
 
   private
   def page
-    params.permit(:page)[:page]
+    params[:page]
   end
 end

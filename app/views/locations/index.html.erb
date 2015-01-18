@@ -1,4 +1,23 @@
-<% content_for :title, 'Locations' %>
+<% if @location.present? %>
+  <% content_for :title, @location.title %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Countries', locations_path %></li>
+    <% if @location.parent.try(:parent).present? %>
+      <li><%= link_to @location.parent.parent.name, @location.parent.parent %></li>
+    <% end %>
+    <% if @location.parent.present? %>
+      <li><%= link_to @location.parent.name, @location.parent %></li>
+    <% end %>
+    <li class="active"><%= link_to @location.name, @location %></li>
+  </ol>
+<% else %>
+  <% content_for :title, 'Locations' %>
+
+  <ol class="breadcrumb">
+    <li><%= link_to 'Countries', locations_path %></li>
+  </ol>
+<% end %>
 
 <%= paginate @locations %>
 

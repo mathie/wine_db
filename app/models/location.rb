@@ -21,7 +21,15 @@ class Location < ActiveRecord::Base
     end
   end
 
-  def self.paginated(page, parent_id = nil)
-    where(parent_id: parent_id).order(:name).page(page)
+  def self.paginated(page)
+    order(:name).page(page)
+  end
+
+  def title
+    if parent.present?
+      [ parent.title, name ].compact.join(' - ')
+    else
+      name
+    end
   end
 end

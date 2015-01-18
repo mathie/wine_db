@@ -1,9 +1,27 @@
-<% content_for :title, @location.name %>
+<% content_for :title, @location.title %>
 
-<dl>
-  <dt>Name</dt>
-  <dd><%= @location.name %></dd>
+<ol class="breadcrumb">
+  <li><%= link_to 'Countries', locations_path %></li>
+  <% if @location.parent.try(:parent).present? %>
+    <li><%= link_to @location.parent.parent.name, @location.parent.parent %></li>
+  <% end %>
+  <% if @location.parent.present? %>
+    <li><%= link_to @location.parent.name, @location.parent %></li>
+  <% end %>
+  <li class="active"><%= link_to @location.name, @location %></li>
+</ol>
 
-  <dt>Number of wines</dt>
-  <dd><%= number_to_human @location.wines.count %></dd>
-</dl>
+<ul class="nav nav-tabs">
+  <li class="active"><%= link_to 'Details', @location %></li>
+  <li><%= link_to 'Sub-locations', location_locations_path(@location) %></li>
+</ul>
+
+<div class="tab-content">
+  <dl>
+    <dt>Name</dt>
+    <dd><%= @location.name %></dd>
+
+    <dt>Number of wines</dt>
+    <dd><%= number_to_human @location.wines.count %></dd>
+  </dl>
+</div>
