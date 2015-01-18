@@ -23,7 +23,7 @@ class Wine < ActiveRecord::Base
   belongs_to :location
   belongs_to :classification
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :producer_id }
   validates :colour, presence: true
   validates :wine_type, presence: true
   validates :location, presence: true
