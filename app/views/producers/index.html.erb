@@ -1,5 +1,10 @@
 <% content_for :title, "Producers" %>
 
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li class="active"><%= link_to 'Producers', producers_path %></li>
+</ol>
+
 <%= paginate @producers %>
 
 <table class="table table-striped table-bordered table-hover">
