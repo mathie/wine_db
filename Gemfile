@@ -27,5 +27,6 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'ruby_gntp'
-end
 
+  gem 'codeclimate-test-reporter', require: false
+end

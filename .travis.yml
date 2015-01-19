@@ -4,6 +4,8 @@ rvm:
 script: RAILS_ENV=test bin/rake spec assets:precompile assets:clean
 addons:
   postgresql: '9.3'
+  code_climate:
+    repo_token: 8a5bd3f6f114502e6ed60c9707592f92240d0b1fb9e6cb6b8f1b052e1206c231
 cache:
   bundler: true
   apt: true
