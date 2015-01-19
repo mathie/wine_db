@@ -1,4 +1,9 @@
-require 'rails_helper'
+require 'spec_helper'
+require 'importers/lwin/spreadsheet'
+require 'importers/lwin/live_wine'
+require 'importers/lwin/combined_wine'
+require 'importers/lwin/deleted_wine'
+
 
 RSpec.describe Importers::Lwin::Spreadsheet do
   subject { described_class.new(fixture_database) }

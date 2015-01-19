@@ -1,4 +1,5 @@
-require 'rails_helper'
+require 'spec_helper'
+require 'importers/lwin/importer'
 
 module Importers
   module Lwin

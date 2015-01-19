@@ -1,4 +1,5 @@
-require 'rails_helper'
+require 'spec_helper'
+require 'importers/lwin/lwin_wine'
 
 RSpec.describe Importers::Lwin::LwinWine do
   describe '#from_row' do

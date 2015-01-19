@@ -1,3 +1,6 @@
+require 'importers/lwin/live_wine'
+require 'importers/lwin/row'
+
 module Importers
   module Lwin
     class ParseError < StandardError

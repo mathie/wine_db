@@ -1,3 +1,5 @@
+require 'importers/lwin/lwin_wine'
+
 module Importers
   module Lwin
     class BaseWine < LwinWine

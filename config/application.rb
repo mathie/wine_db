@@ -34,3 +34,5 @@ module WineDb
     config.active_record.schema_format = :sql
   end
 end
+
+require 'importers/lwin'

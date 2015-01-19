@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'importers/lwin/row'
 
 RSpec.describe Importers::Lwin::Row do
   let(:subject) { described_class.new(row_data) }
