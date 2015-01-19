@@ -12,39 +12,11 @@ module Importers
       def self.from_row(row)
         case row.status
         when :live
-          LiveWine.new(
-            identifier:     row.identifier,
-            producer:       row.producer,
-            wine:           row.wine,
-            country:        row.country,
-            region:         row.region,
-            subregion:      row.subregion,
-            colour:         row.colour,
-            type:           row.type,
-            designation:    row.designation,
-            classification: row.classification,
-            date_updated:   row.date_updated
-          )
+          LiveWine.from_row(row)
         when :combined
-          CombinedWine.new(
-            identifier:     row.identifier,
-            producer:       row.producer,
-            wine:           row.wine,
-            country:        row.country,
-            region:         row.region,
-            subregion:      row.subregion,
-            colour:         row.colour,
-            type:           row.type,
-            designation:    row.designation,
-            classification: row.classification,
-            reference:      row.reference,
-            date_updated:   row.date_updated
-          )
+          CombinedWine.from_row(row)
         when :deleted
-          DeletedWine.new(
-            identifier:   row.identifier,
-            date_updated: row.date_updated
-          )
+          DeletedWine.from_row(row)
         else
           raise "unrecognised status, '#{status}' for row, #{row.to_a.inspect}"
         end
