@@ -77,12 +77,13 @@ CREATE TABLE locations (
 
 CREATE TABLE lwin_identifiers (
     id integer NOT NULL,
-    identifier integer NOT NULL,
+    identifier character varying NOT NULL,
     status integer NOT NULL,
     identifier_updated_at date NOT NULL,
     wine_id uuid,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    search_vector tsvector
 );
 
 
@@ -228,6 +229,13 @@ CREATE UNIQUE INDEX index_lwin_identifiers_on_identifier ON lwin_identifiers USI
 
 
 --
+-- Name: index_lwin_identifiers_on_search_vector; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_lwin_identifiers_on_search_vector ON lwin_identifiers USING gin (search_vector);
+
+
+--
 -- Name: index_producers_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -267,6 +275,13 @@ CREATE TRIGGER classifications_search_vector_update BEFORE INSERT OR UPDATE ON c
 --
 
 CREATE TRIGGER locations_search_vector_update BEFORE INSERT OR UPDATE ON locations FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search_vector', 'pg_catalog.english', 'name');
+
+
+--
+-- Name: lwin_identifiers_search_vector_update; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER lwin_identifiers_search_vector_update BEFORE INSERT OR UPDATE ON lwin_identifiers FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search_vector', 'pg_catalog.english', 'identifier');
 
 
 --

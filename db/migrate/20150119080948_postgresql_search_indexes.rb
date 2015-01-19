@@ -4,9 +4,15 @@ class PostgresqlSearchIndexes < ActiveRecord::Migration
     add_search_vector :classifications, [:designation, :classification]
     add_search_vector :producers, :name
     add_search_vector :locations, :name
+
+    change_column :lwin_identifiers, :identifier, :string, null: false
+    add_search_vector :lwin_identifiers, :identifier
   end
 
   def down
+    remove_search_vector :lwin_identifiers
+    change_column :lwin_identifiers, :identifier, :integer, null: false
+
     remove_search_vector :locations
     remove_search_vector :producers
     remove_search_vector :classifications
