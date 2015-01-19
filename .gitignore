@@ -11,3 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Code coverage reports
+/coverage
