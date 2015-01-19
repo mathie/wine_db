@@ -33,6 +33,14 @@ class Wine < ActiveRecord::Base
     order(:name).page(page)
   end
 
+  def self.search(query)
+    query_function = sanitize_sql_array(["plainto_tsquery('english', ?)", query])
+    conditions = "search_vector @@ #{query_function}"
+    order = "ts_rank_cd(search_vector, #{query_function}) DESC"
+
+    where(conditions).order(order)
+  end
+
   def canonical_identifier
     lwin_identifiers.live.take!
   end
