@@ -1,4 +1,6 @@
 class Wine < ActiveRecord::Base
+  include Searchable
+
   enum colour: [ :unknown_colour, :red, :rose, :white ]
   enum wine_type: [
     :unknown_wine_type,

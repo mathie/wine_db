@@ -9,7 +9,7 @@ class WinesController < ApplicationController
 
   private
   def scope
-    if location_id = params[:location_id]
+    scope = if location_id = params[:location_id]
       @location = Location.find(location_id)
       @location.wines
     elsif producer_id = params[:producer_id]
@@ -20,6 +20,12 @@ class WinesController < ApplicationController
       @classification.wines
     else
       Wine
+    end
+
+    if query = params[:q]
+      scope.search(query)
+    else
+      scope
     end
   end
 end

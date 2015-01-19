@@ -1,4 +1,6 @@
 class LwinIdentifier < ActiveRecord::Base
+  include Searchable
+
   enum status: [
     :live,
     :deleted,

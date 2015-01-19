@@ -1,4 +1,6 @@
 class Classification < ActiveRecord::Base
+  include Searchable
+
   has_many :wines, dependent: :destroy
 
   validates :designation, presence: true

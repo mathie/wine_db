@@ -9,11 +9,17 @@ class LocationsController < ApplicationController
 
   private
   def scope
-    if location_id = params[:location_id]
+    scope = if location_id = params[:location_id]
       @location = Location.find(location_id)
       @location.children
     else
       Location.where(parent_id: nil)
+    end
+
+    if query = params[:q]
+      scope.search(query)
+    else
+      scope
     end
   end
 end

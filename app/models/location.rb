@@ -1,4 +1,6 @@
 class Location < ActiveRecord::Base
+  include Searchable
+
   belongs_to :parent, class_name: 'Location'
   has_many :children, class_name: 'Location', foreign_key: 'parent_id', dependent: :destroy
   has_many :wines, dependent: :destroy
