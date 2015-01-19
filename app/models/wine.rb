@@ -1,4 +1,6 @@
 class Wine < ActiveRecord::Base
+  include Searchable
+
   enum colour: [ :unknown_colour, :red, :rose, :white ]
   enum wine_type: [
     :unknown_wine_type,
@@ -31,14 +33,6 @@ class Wine < ActiveRecord::Base
 
   def self.paginated(page)
     order(:name).page(page)
-  end
-
-  def self.search(query)
-    query_function = sanitize_sql_array(["plainto_tsquery('english', ?)", query])
-    conditions = "search_vector @@ #{query_function}"
-    order = "ts_rank_cd(search_vector, #{query_function}) DESC"
-
-    where(conditions).order(order)
   end
 
   def canonical_identifier
