@@ -52,7 +52,8 @@ CREATE TABLE classifications (
     designation character varying NOT NULL,
     classification character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    search_vector tsvector
 );
 
 
@@ -65,7 +66,8 @@ CREATE TABLE locations (
     name character varying NOT NULL,
     parent_id uuid,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    search_vector tsvector
 );
 
 
@@ -111,7 +113,8 @@ CREATE TABLE producers (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     name character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    search_vector tsvector
 );
 
 
@@ -137,7 +140,8 @@ CREATE TABLE wines (
     location_id uuid NOT NULL,
     classification_id uuid,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    search_vector tsvector
 );
 
 
@@ -196,10 +200,24 @@ CREATE UNIQUE INDEX index_classifications_on_designation_and_classification ON c
 
 
 --
+-- Name: index_classifications_on_search_vector; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_classifications_on_search_vector ON classifications USING gin (search_vector);
+
+
+--
 -- Name: index_locations_on_parent_id_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_locations_on_parent_id_and_name ON locations USING btree (parent_id, name);
+
+
+--
+-- Name: index_locations_on_search_vector; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_locations_on_search_vector ON locations USING gin (search_vector);
 
 
 --
@@ -217,10 +235,52 @@ CREATE UNIQUE INDEX index_producers_on_name ON producers USING btree (name);
 
 
 --
+-- Name: index_producers_on_search_vector; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_producers_on_search_vector ON producers USING gin (search_vector);
+
+
+--
+-- Name: index_wines_on_search_vector; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_wines_on_search_vector ON wines USING gin (search_vector);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: classifications_search_vector_update; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER classifications_search_vector_update BEFORE INSERT OR UPDATE ON classifications FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search_vector', 'pg_catalog.english', 'designation', 'classification');
+
+
+--
+-- Name: locations_search_vector_update; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER locations_search_vector_update BEFORE INSERT OR UPDATE ON locations FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search_vector', 'pg_catalog.english', 'name');
+
+
+--
+-- Name: producers_search_vector_update; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER producers_search_vector_update BEFORE INSERT OR UPDATE ON producers FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search_vector', 'pg_catalog.english', 'name');
+
+
+--
+-- Name: wines_search_vector_update; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER wines_search_vector_update BEFORE INSERT OR UPDATE ON wines FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search_vector', 'pg_catalog.english', 'name');
 
 
 --
@@ -256,11 +316,11 @@ ALTER TABLE ONLY wines
 
 
 --
--- Name: fk_rails_b8ead74c10; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_d4e8ca76a6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lwin_identifiers
-    ADD CONSTRAINT fk_rails_b8ead74c10 FOREIGN KEY (wine_id) REFERENCES wines(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT fk_rails_d4e8ca76a6 FOREIGN KEY (wine_id) REFERENCES wines(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
 --
@@ -278,4 +338,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150113155025');
 INSERT INTO schema_migrations (version) VALUES ('20150113173000');
 
 INSERT INTO schema_migrations (version) VALUES ('20150113190459');
+
+INSERT INTO schema_migrations (version) VALUES ('20150119080948');
 
