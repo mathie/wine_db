@@ -1,4 +1,7 @@
 require 'importers/lwin/spreadsheet'
+require 'importers/lwin/deleted_wine'
+require 'importers/lwin/combined_wine'
+require 'importers/lwin/live_wine'
 
 module Importers
   module Lwin
