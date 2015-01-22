@@ -16,6 +16,7 @@ gem 'autoprefixer-rails'
 
 gem 'spreadsheet'
 gem 'kaminari'
+gem 'sunspot_rails'
 
 group :development, :test do
   gem 'spring'

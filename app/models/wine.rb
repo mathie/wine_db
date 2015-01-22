@@ -21,6 +21,10 @@ class Wine < ActiveRecord::Base
     :whiskies
   ]
 
+  searchable do
+    text :name
+  end
+
   belongs_to :producer
   belongs_to :location
   belongs_to :classification
