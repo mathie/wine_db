@@ -31,4 +31,37 @@ RSpec.describe Classification do
       expect(duplicate.errors[:classification]).to include(/has already been taken/)
     end
   end
+
+  describe '.title' do
+    it 'generates the right title with just a designation' do
+      classification = factory(designation: 'AOC', classification: '')
+
+      expect(classification.title).to eq('AOC')
+    end
+
+    it 'generates the right title with a designation and classification' do
+      classification = factory(designation: 'AOC', classification: 'grand_cru')
+
+      expect(classification.title).to eq('AOC - Grand Cru')
+    end
+  end
+
+  describe 'pagination' do
+    before(:each) do
+      allow(described_class).to receive(:order) { described_class }
+      allow(described_class).to receive(:page) { described_class }
+    end
+
+    it 'orders by designation and classification' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:order).with(:designation, :classification)
+    end
+
+    it 'retrieves the correct page' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:page).with(2)
+    end
+  end
 end

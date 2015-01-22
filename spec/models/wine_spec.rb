@@ -32,4 +32,23 @@ RSpec.describe Wine do
       expect(wine.errors[:wine_type]).to include(/can't be blank/)
     end
   end
+
+  describe 'pagination' do
+    before(:each) do
+      allow(described_class).to receive(:order) { described_class }
+      allow(described_class).to receive(:page) { described_class }
+    end
+
+    it 'orders by name' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:order).with(:name)
+    end
+
+    it 'retrieves the correct page' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:page).with(2)
+    end
+  end
 end

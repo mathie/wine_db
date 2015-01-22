@@ -53,6 +53,25 @@ RSpec.describe Location do
     end
   end
 
+  describe 'pagination' do
+    before(:each) do
+      allow(described_class).to receive(:order) { described_class }
+      allow(described_class).to receive(:page) { described_class }
+    end
+
+    it 'orders by name' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:order).with(:name)
+    end
+
+    it 'retrieves the correct page' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:page).with(2)
+    end
+  end
+
   describe '.find_or_create_by_tuple' do
     context 'for a country' do
       context 'which does not already exist' do
