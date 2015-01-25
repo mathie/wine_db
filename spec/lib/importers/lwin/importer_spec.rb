@@ -53,6 +53,12 @@ RSpec.describe Importers::Lwin::Importer do
     }.to change(Location, :count).by(5)
   end
 
+  it 'creates 2 producers' do
+    expect {
+      subject.import
+    }.to change(Producer, :count).by(2)
+  end
+
   it 'correctly imports the first wine' do
     subject.import
 
@@ -65,5 +71,41 @@ RSpec.describe Importers::Lwin::Importer do
     expect(wine.location.name).to eq('Alsace')
     expect(wine.producer.name).to eq('Chapoutier')
     expect(wine.canonical_identifier.identifier).to eq("1000001")
+  end
+
+  context 'importing the same file twice' do
+    before(:each) do
+      subject.import
+    end
+
+    it 'runs the import successfully' do
+      expect {
+        subject.import
+      }.not_to raise_error
+    end
+
+    it 'creates no new identifiers' do
+      expect {
+        subject.import
+      }.not_to change(LwinIdentifier, :count)
+    end
+
+    it 'creates no new wines' do
+      expect {
+        subject.import
+      }.not_to change(Wine, :count)
+    end
+
+    it 'creates no new locations' do
+      expect {
+        subject.import
+      }.not_to change(Location, :count)
+    end
+
+    it 'creates no new producers' do
+      expect {
+        subject.import
+      }.not_to change(Producer, :count)
+    end
   end
 end
