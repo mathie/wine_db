@@ -17,7 +17,7 @@ module Importers
       end
 
       def inspect
-        "<#Spreadsheet:#{object_id}> version=#{version.inspect} date_updated=#{date_updated.inspect}>"
+        "<#Spreadsheet:#{object_id} version=#{version.inspect} date_updated=#{date_updated.inspect}>"
       end
 
       def version

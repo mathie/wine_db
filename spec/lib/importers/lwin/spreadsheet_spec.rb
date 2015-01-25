@@ -29,6 +29,10 @@ RSpec.describe Importers::Lwin::Spreadsheet do
       expect(subject.date_updated).to eq(Date.new(2014, 11, 28))
     end
 
+    it 'has appropriate #inspect output' do
+      expect(subject.inspect).to match(/<#Spreadsheet:[0-9A-F]+ version="L-WIN_28112014" date_updated=Fri, 28 Nov 2014>/)
+    end
+
     describe 'iterating through all the wines' do
       before(:each) do
         @wines = []

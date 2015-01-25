@@ -80,6 +80,10 @@ RSpec.describe Importers::Lwin::Row do
     it 'can extract the date updated' do
       expect(subject.date_updated).to eq(Date.new(2011, 6, 8))
     end
+
+    it 'generates appropriate #inspect output' do
+      expect(subject.inspect).to match(/<Row:[0-9A-F]+ identifier="1000001", status=:live, producer="Chapoutier", wine="Riesling Schieferkopf Lieu Dit Buehl", country="France", region="Alsace", subregion=nil, colour=:white, type=:still, designation=:aoc, classification=nil, reference=nil, date_updated=Wed, 08 Jun 2011>/)
+    end
   end
 
   context 'for a row describing a combined wine' do
