@@ -66,7 +66,7 @@ module Importers
         expect(wine.classification.designation).to eq('aoc')
         expect(wine.location.name).to eq('Alsace')
         expect(wine.producer.name).to eq('Chapoutier')
-        expect(wine.canonical_identifier.identifier).to eq(1000001)
+        expect(wine.canonical_identifier.identifier).to eq("1000001")
       end
     end
   end
