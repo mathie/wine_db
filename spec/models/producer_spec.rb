@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'models/concerns/searchable_spec'
 
 RSpec.describe Producer do
   def factory(attributes = {})
@@ -6,6 +7,8 @@ RSpec.describe Producer do
       name: 'Trimbach'
     }.merge(attributes))
   end
+
+  it_behaves_like 'Searchable'
 
   describe 'validations' do
     it 'requires a name' do

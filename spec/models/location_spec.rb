@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'models/concerns/searchable_spec'
 
 RSpec.describe Location do
   def country_factory(attributes = {})
@@ -20,6 +21,8 @@ RSpec.describe Location do
       parent: region_factory
     }.merge(attributes))
   end
+
+  it_behaves_like 'Searchable'
 
   describe 'validations' do
     it 'requires a name' do

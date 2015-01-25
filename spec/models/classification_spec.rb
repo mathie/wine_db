@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'models/concerns/searchable_spec'
 
 RSpec.describe Classification do
   def factory(attributes = {})
@@ -7,6 +8,8 @@ RSpec.describe Classification do
       designation: 'Grand Cru'
     }.merge(attributes))
   end
+
+  it_behaves_like 'Searchable'
 
   describe 'validations' do
     it 'requires a designation' do

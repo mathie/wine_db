@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'models/concerns/searchable_spec'
 
 RSpec.describe Wine do
   def factory(attributes = {})
@@ -9,6 +10,8 @@ RSpec.describe Wine do
       location: Location.new(name: 'France')
     }.merge(attributes))
   end
+
+  it_behaves_like 'Searchable'
 
   describe 'validations' do
     it 'requires a name' do

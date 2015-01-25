@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'models/concerns/searchable_spec'
 
 RSpec.describe LwinIdentifier do
   def factory(attributes = {})
@@ -9,6 +10,8 @@ RSpec.describe LwinIdentifier do
       wine: Wine.new(name: 'Reisling')
     }.merge(attributes))
   end
+
+  it_behaves_like 'Searchable'
 
   describe 'validations' do
     it 'requires an identifier' do
