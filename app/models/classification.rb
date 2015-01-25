@@ -12,6 +12,9 @@ class Classification < ActiveRecord::Base
   end
 
   def title
-    [ designation, classification ].compact.map(&:humanize).join(' - ')
+    [
+      designation,
+      classification.try(:humanize).try(:titleize)
+    ].select(&:present?).join(' - ')
   end
 end

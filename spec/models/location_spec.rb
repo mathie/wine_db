@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'models/concerns/searchable_spec'
 
 RSpec.describe Location do
   def country_factory(attributes = {})
@@ -16,10 +17,12 @@ RSpec.describe Location do
 
   def subregion_factory(attributes = {})
     described_class.new({
-      name: 'Alsace',
+      name: 'Hengst',
       parent: region_factory
     }.merge(attributes))
   end
+
+  it_behaves_like 'Searchable'
 
   describe 'validations' do
     it 'requires a name' do
@@ -50,6 +53,25 @@ RSpec.describe Location do
         expect(duplicate).not_to be_valid
         expect(duplicate.errors[:name]).to include(/has already been taken/)
       end
+    end
+  end
+
+  describe 'pagination' do
+    before(:each) do
+      allow(described_class).to receive(:order) { described_class }
+      allow(described_class).to receive(:page) { described_class }
+    end
+
+    it 'orders by name' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:order).with(:name)
+    end
+
+    it 'retrieves the correct page' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:page).with(2)
     end
   end
 
@@ -178,6 +200,32 @@ RSpec.describe Location do
           expect(subregion.parent.name).to eq('Alsace')
           expect(subregion.parent.parent.name).to eq('France')
         end
+      end
+    end
+  end
+
+  describe '#title' do
+    context 'for a country' do
+      let(:country) { country_factory }
+
+      it 'gets the right title' do
+        expect(country.title).to eq('France')
+      end
+    end
+
+    context 'for a region' do
+      let(:region) { region_factory }
+
+      it 'gets the right title' do
+        expect(region.title).to eq('France - Alsace')
+      end
+    end
+
+    context 'for a subregion' do
+      let(:subregion) { subregion_factory }
+
+      it 'gets the right title' do
+        expect(subregion.title).to eq('France - Alsace - Hengst')
       end
     end
   end

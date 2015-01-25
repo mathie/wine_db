@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'models/concerns/searchable_spec'
 
 RSpec.describe LwinIdentifier do
   def factory(attributes = {})
@@ -9,6 +10,8 @@ RSpec.describe LwinIdentifier do
       wine: Wine.new(name: 'Reisling')
     }.merge(attributes))
   end
+
+  it_behaves_like 'Searchable'
 
   describe 'validations' do
     it 'requires an identifier' do
@@ -50,6 +53,25 @@ RSpec.describe LwinIdentifier do
       wine = factory(status: :deleted, wine: nil)
 
       expect(wine).to be_valid
+    end
+  end
+
+  describe 'pagination' do
+    before(:each) do
+      allow(described_class).to receive(:order) { described_class }
+      allow(described_class).to receive(:page) { described_class }
+    end
+
+    it 'orders by identifier' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:order).with(:identifier)
+    end
+
+    it 'retrieves the correct page' do
+      described_class.paginated(2)
+
+      expect(described_class).to have_received(:page).with(2)
     end
   end
 end

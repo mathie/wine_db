@@ -37,6 +37,18 @@ RSpec.describe LocationsController do
 
       expect(assigns(:locations)).to eq(locations)
     end
+
+    context 'with a search query' do
+      def do_get
+        get :index, q: 'chicken'
+      end
+
+      it "asks the model to search based on the query" do
+        do_get
+
+        expect(locations_class).to have_received(:search).with('chicken')
+      end
+    end
   end
 
   describe "GET show" do
