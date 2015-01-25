@@ -51,4 +51,42 @@ RSpec.describe Wine do
       expect(described_class).to have_received(:page).with(2)
     end
   end
+
+  describe '.canonical_identifier' do
+    let!(:wine) { factory.tap { |factory| factory.save! } }
+    let!(:canonical_identifier) {
+      LwinIdentifier.create!(
+        identifier: '42',
+        status: :live,
+        wine: wine,
+        identifier_updated_at: Time.now
+      )
+    }
+
+    it 'retrieve the live L-Win identifier' do
+      expect(wine.canonical_identifier).to eq(canonical_identifier)
+    end
+  end
+
+  describe '.combined_identifiers' do
+    let!(:wine) { factory.tap { |factory| factory.save! } }
+    let!(:combined_identifiers) { [
+      LwinIdentifier.create!(
+        identifier: '42',
+        status: :combined,
+        wine: wine,
+        identifier_updated_at: Time.now
+      ),
+      LwinIdentifier.create!(
+        identifier: '54',
+        status: :combined,
+        wine: wine,
+        identifier_updated_at: Time.now
+      )
+    ] }
+
+    it 'retrieve the combined L-Win identifiers' do
+      expect(wine.combined_identifiers).to eq(combined_identifiers)
+    end
+  end
 end
