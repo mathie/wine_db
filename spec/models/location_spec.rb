@@ -17,7 +17,7 @@ RSpec.describe Location do
 
   def subregion_factory(attributes = {})
     described_class.new({
-      name: 'Alsace',
+      name: 'Hengst',
       parent: region_factory
     }.merge(attributes))
   end
@@ -200,6 +200,32 @@ RSpec.describe Location do
           expect(subregion.parent.name).to eq('Alsace')
           expect(subregion.parent.parent.name).to eq('France')
         end
+      end
+    end
+  end
+
+  describe '#title' do
+    context 'for a country' do
+      let(:country) { country_factory }
+
+      it 'gets the right title' do
+        expect(country.title).to eq('France')
+      end
+    end
+
+    context 'for a region' do
+      let(:region) { region_factory }
+
+      it 'gets the right title' do
+        expect(region.title).to eq('France - Alsace')
+      end
+    end
+
+    context 'for a subregion' do
+      let(:subregion) { subregion_factory }
+
+      it 'gets the right title' do
+        expect(subregion.title).to eq('France - Alsace - Hengst')
       end
     end
   end
