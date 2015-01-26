@@ -6,57 +6,39 @@ RSpec.describe Importers::Lwin::Importer do
   let(:subject) { described_class.new(fixture_file) }
 
   it 'can be constructed successfully' do
-    expect {
-      subject
-    }.not_to raise_error
+    expect { subject }.not_to raise_error
   end
 
   it 'runs the import successfully' do
-    expect {
-      subject.import
-    }.not_to raise_error
+    expect { subject.import }.not_to raise_error
   end
 
   it 'creates 12 new identifiers' do
-    expect {
-      subject.import
-    }.to change(LwinIdentifier, :count).by(12)
+    expect { subject.import }.to change(LwinIdentifier, :count).by(12)
   end
 
   it 'creates 5 live identifiers' do
-    expect {
-      subject.import
-    }.to change(LwinIdentifier.live, :count).by(5)
+    expect { subject.import }.to change(LwinIdentifier.live, :count).by(5)
   end
 
   it 'creates 5 combined identifiers' do
-    expect {
-      subject.import
-    }.to change(LwinIdentifier.combined, :count).by(5)
+    expect { subject.import }.to change(LwinIdentifier.combined, :count).by(5)
   end
 
   it 'creates 2 deleted identifiers' do
-    expect {
-      subject.import
-    }.to change(LwinIdentifier.deleted, :count).by(2)
+    expect { subject.import }.to change(LwinIdentifier.deleted, :count).by(2)
   end
 
   it 'creates 5 wines' do
-    expect {
-      subject.import
-    }.to change(Wine, :count).by(5)
+    expect { subject.import }.to change(Wine, :count).by(5)
   end
 
   it 'creates 5 locations' do
-    expect {
-      subject.import
-    }.to change(Location, :count).by(5)
+    expect { subject.import }.to change(Location, :count).by(5)
   end
 
   it 'creates 2 producers' do
-    expect {
-      subject.import
-    }.to change(Producer, :count).by(2)
+    expect { subject.import }.to change(Producer, :count).by(2)
   end
 
   it 'correctly imports the first wine' do
@@ -79,33 +61,23 @@ RSpec.describe Importers::Lwin::Importer do
     end
 
     it 'runs the import successfully' do
-      expect {
-        subject.import
-      }.not_to raise_error
+      expect { subject.import }.not_to raise_error
     end
 
     it 'creates no new identifiers' do
-      expect {
-        subject.import
-      }.not_to change(LwinIdentifier, :count)
+      expect { subject.import }.not_to change(LwinIdentifier, :count)
     end
 
     it 'creates no new wines' do
-      expect {
-        subject.import
-      }.not_to change(Wine, :count)
+      expect { subject.import }.not_to change(Wine, :count)
     end
 
     it 'creates no new locations' do
-      expect {
-        subject.import
-      }.not_to change(Location, :count)
+      expect { subject.import }.not_to change(Location, :count)
     end
 
     it 'creates no new producers' do
-      expect {
-        subject.import
-      }.not_to change(Producer, :count)
+      expect { subject.import }.not_to change(Producer, :count)
     end
   end
 end

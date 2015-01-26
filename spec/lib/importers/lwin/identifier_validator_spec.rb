@@ -6,7 +6,7 @@ RSpec.describe Importers::Lwin::IdentifierValidator do
   let(:attribute) { 'attribute' }
   let(:errors)    { double('Errors', add: nil) }
   let(:record)    { double('Record', errors: errors) }
-  let(:validator) { Importers::Lwin::IdentifierValidator.new(attributes: [ attribute ]) }
+  let(:validator) { described_class.new(attributes: [ attribute ]) }
 
   def validate(identifier)
     validator.validate_each(record, attribute, identifier)

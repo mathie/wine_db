@@ -18,7 +18,7 @@ module Importers
         when :deleted
           DeletedWine.from_row(row)
         else
-          raise "unrecognised status, '#{status}' for row, #{row.to_a.inspect}"
+          fail "unrecognised status, '#{status}' for row, #{row.to_a.inspect}"
         end
       end
 

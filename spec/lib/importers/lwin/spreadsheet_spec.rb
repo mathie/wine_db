@@ -62,16 +62,14 @@ RSpec.describe Importers::Lwin::Spreadsheet do
   end
 
   context 'with an invalid database' do
-    let(:fixture_database) {
+    let(:fixture_database) do
       Rails.root.join(
         'spec', 'fixtures', 'importers', 'L-WIN_invalid_database_sample.xls'
       )
-    }
+    end
 
     it 'raises an error when trying to open the file' do
-      expect {
-        subject
-      }.to raise_error(Importers::Lwin::ParseError)
+      expect { subject }.to raise_error(Importers::Lwin::ParseError)
     end
   end
 end

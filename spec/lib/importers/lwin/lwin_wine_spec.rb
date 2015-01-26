@@ -8,7 +8,7 @@ RSpec.describe Importers::Lwin::LwinWine do
       let(:row) { instance_spy('Row', status: :live) }
 
       it 'correctly constructs the right wine' do
-        wine = described_class.from_row(row)
+        described_class.from_row(row)
 
         expect(wine_class).to have_received(:from_row)
       end
@@ -19,7 +19,7 @@ RSpec.describe Importers::Lwin::LwinWine do
       let(:row) { instance_spy('Row', status: :deleted) }
 
       it 'correctly constructs the right wine' do
-        wine = described_class.from_row(row)
+        described_class.from_row(row)
 
         expect(wine_class).to have_received(:from_row)
       end
@@ -30,7 +30,7 @@ RSpec.describe Importers::Lwin::LwinWine do
       let(:row) { instance_spy('Row', status: :combined) }
 
       it 'correctly constructs the right wine' do
-        wine = described_class.from_row(row)
+        described_class.from_row(row)
 
         expect(wine_class).to have_received(:from_row)
       end
