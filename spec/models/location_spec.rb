@@ -103,10 +103,7 @@ RSpec.describe Location do
 
     context 'for a region' do
       context 'where the country already exists' do
-        before(:each) do
-          @country = country_factory(name: 'France')
-          @country.save!
-        end
+        let!(:country) { country_factory(name: 'France').tap(&:save!) }
 
         context 'and the region does not exist' do
           it 'creates and returns the region' do
@@ -114,20 +111,18 @@ RSpec.describe Location do
 
             expect(region).to be_persisted
             expect(region.name).to eq('Alsace')
-            expect(region.parent).to eq(@country)
+            expect(region.parent).to eq(country)
           end
         end
 
         context 'and the region already exists' do
-          before(:each) do
-            @region = @country.children.create!(name: 'Alsace')
-          end
+          let!(:region) { country.children.create!(name: 'Alsace') }
 
           it 'returns the existing region' do
             region = described_class.find_or_create_by_tuple('France', 'Alsace')
 
             expect(region).to be_persisted
-            expect(region).to eq(@region)
+            expect(region).to eq(region)
           end
         end
       end
@@ -145,26 +140,19 @@ RSpec.describe Location do
 
     context 'for a subregion' do
       context 'where the country already exists' do
-        before(:each) do
-          @country = country_factory(name: 'France')
-          @country.save!
-        end
+        let!(:country) { country_factory(name: 'France').tap(&:save!) }
 
         context 'and the region already exists' do
-          before(:each) do
-            @region = @country.children.create!(name: 'Alsace')
-          end
+          let!(:region) { country.children.create!(name: 'Alsace') }
 
           context 'and the subregion already exists' do
-            before(:each) do
-              @subregion = @region.children.create!(name: 'Villeneuve')
-            end
+            let!(:subregion) { region.children.create!(name: 'Villeneuve') }
 
             it 'returns the existing subregion' do
               subregion = described_class.find_or_create_by_tuple('France', 'Alsace', 'Villeneuve')
 
               expect(subregion).to be_persisted
-              expect(subregion).to eq(@subregion)
+              expect(subregion).to eq(subregion)
             end
           end
 
@@ -174,7 +162,7 @@ RSpec.describe Location do
 
               expect(subregion).to be_persisted
               expect(subregion.name).to eq('Villeneuve')
-              expect(subregion.parent).to eq(@region)
+              expect(subregion.parent).to eq(region)
             end
           end
         end
@@ -186,7 +174,7 @@ RSpec.describe Location do
             expect(subregion).to be_persisted
             expect(subregion.name).to eq('Villeneuve')
             expect(subregion.parent.name).to eq('Alsace')
-            expect(subregion.parent.parent).to eq(@country)
+            expect(subregion.parent.parent).to eq(country)
           end
         end
       end

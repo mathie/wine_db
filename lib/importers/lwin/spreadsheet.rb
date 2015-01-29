@@ -11,9 +11,7 @@ module Importers
         @workbook = ::Spreadsheet.open(io_or_path)
 
         # Sanity check it's maybe the right spreadsheet
-        unless valid_workbook?
-          raise ParseError, "This is not an L-WIN spreadsheet."
-        end
+        raise ParseError, 'This is not an L-WIN spreadsheet.' unless valid_workbook?
       end
 
       def inspect

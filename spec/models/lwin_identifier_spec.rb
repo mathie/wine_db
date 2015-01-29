@@ -4,7 +4,7 @@ require 'models/concerns/searchable_spec'
 RSpec.describe LwinIdentifier do
   def factory(attributes = {})
     described_class.new({
-      identifier: 1000001,
+      identifier: '1000001',
       status: :live,
       identifier_updated_at: Date.new(2011, 6, 8),
       wine: Wine.new(name: 'Reisling')

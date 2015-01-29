@@ -71,14 +71,13 @@ module Importers
       end
 
       private
+
       attr_reader :row
 
       def extract_column_value(column)
         value = row[column]
         if value.present? && !INVALID_CELLS.include?(value)
           block_given? ? yield(value) : value
-        else
-          nil
         end
       end
 

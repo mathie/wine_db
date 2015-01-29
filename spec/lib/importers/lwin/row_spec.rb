@@ -5,7 +5,7 @@ RSpec.describe Importers::Lwin::Row do
   let(:subject) { described_class.new(row_data) }
 
   context 'for a row describing a full wine' do
-    let (:row_data) {
+    let(:row_data) do
       [
         '1000001',                              # L-Win Identifier
         'Live',                                 # Status
@@ -21,12 +21,10 @@ RSpec.describe Importers::Lwin::Row do
         nil,                                    # Reference
         '08/06/2011'                            # Date Update
       ]
-    }
+    end
 
     it 'can be instantiated with a valid row of data' do
-      expect {
-        subject
-      }.not_to raise_error
+      expect { subject }.not_to raise_error
     end
 
     it 'can extract the identifier' do
@@ -88,7 +86,7 @@ RSpec.describe Importers::Lwin::Row do
 
   context 'for a row describing a combined wine' do
     context 'which has all its own information' do
-      let (:row_data) {
+      let(:row_data) do
         [
           '1000131',
           'Combined',
@@ -104,12 +102,10 @@ RSpec.describe Importers::Lwin::Row do
           '1316384',
           '24/11/2014'
         ]
-      }
+      end
 
       it 'can be instantiated with a valid row of data' do
-        expect {
-          subject
-        }.not_to raise_error
+        expect { subject }.not_to raise_error
       end
 
       it 'can extract the identifier' do
@@ -166,7 +162,7 @@ RSpec.describe Importers::Lwin::Row do
     end
 
     context 'which has very little information of its own' do
-      let (:row_data) {
+      let(:row_data) do
         [
           '1000447',
           'Combined',
@@ -182,11 +178,10 @@ RSpec.describe Importers::Lwin::Row do
           '1148042',
           '22/02/2012'
         ]
-      }
+      end
+
       it 'can be instantiated with a valid row of data' do
-        expect {
-          subject
-        }.not_to raise_error
+        expect { subject }.not_to raise_error
       end
 
       it 'can extract the identifier' do
@@ -245,7 +240,7 @@ RSpec.describe Importers::Lwin::Row do
 
   context 'for a row describing a deleted wine' do
     context 'which has all its own information' do
-      let (:row_data) {
+      let(:row_data) do
         [
           '1026074',
           'Deleted',
@@ -261,12 +256,10 @@ RSpec.describe Importers::Lwin::Row do
           '',
           '20/11/2014'
         ]
-      }
+      end
 
       it 'can be instantiated with a valid row of data' do
-        expect {
-          subject
-        }.not_to raise_error
+        expect { subject }.not_to raise_error
       end
 
       it 'can extract the identifier' do
@@ -323,7 +316,7 @@ RSpec.describe Importers::Lwin::Row do
     end
 
     context 'which has very little information of its own' do
-      let (:row_data) {
+      let (:row_data) do
         [
           '1024575',
           'Deleted',
@@ -339,11 +332,10 @@ RSpec.describe Importers::Lwin::Row do
           '',
           '18/02/2013'
         ]
-      }
+      end
+
       it 'can be instantiated with a valid row of data' do
-        expect {
-          subject
-        }.not_to raise_error
+        expect { subject }.not_to raise_error
       end
 
       it 'can extract the identifier' do

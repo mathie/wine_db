@@ -24,9 +24,13 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
 
-  gem 'guard-rspec'
-  gem 'guard-bundler'
+  gem 'guard-rspec', require: false
+  gem 'guard-bundler', require: false
+  gem 'guard-rubocop', require: false
   gem 'ruby_gntp'
 
   gem 'codeclimate-test-reporter', require: false
+
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
 end
