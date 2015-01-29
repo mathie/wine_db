@@ -32,6 +32,11 @@ module WineDb
     config.active_record.raise_in_transactional_callbacks = true
 
     config.active_record.schema_format = :sql
+
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    Dir[Rails.root.join('vendor', 'assets', 'bower_components', 'bootstrap-sass-official', 'assets', '*')].each do |asset_dir|
+      config.assets.paths << asset_dir
+    end
   end
 end
 
