@@ -2,4 +2,31 @@
   <h1>Producers</h1>
 </hgroup>
 
-<p>TODO: Stick a list of producers in here.</p>
+<ol class="breadcrumb" ng-controller="NavigationController">
+  <li>
+    <a href ng-click="rootPath()">Home</a>
+  </li>
+  <li class="active">Producers</li>
+</ol>
+
+<form class="form-inline text-center" role="form" method="get">
+  <div class="form-group">
+    <label for="q" class="sr-only">Query</label>
+    <input type="search" name="q" class="form-control" placeholder="Enter a search term...">
+  </div>
+
+  <input type="submit" class="btn btn-primary" value="Search">
+</form>
+<hr>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Number of wines</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  </tbody>
+</table>
