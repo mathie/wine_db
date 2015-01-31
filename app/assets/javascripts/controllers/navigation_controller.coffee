@@ -9,8 +9,8 @@ controllers.controller('NavigationController', [ '$scope', '$location',
 			$location.path().indexOf(path) == 0
 
 		$scope.rootPath = ->
-			$location.path('/')
+			$location.url('/')
 
 		$scope.producersPath = ->
-			$location.path('/producers')
+			$location.url('/producers')
 ])
