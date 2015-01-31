@@ -1,5 +1,5 @@
 controllers = angular.module('controllers')
 
-controllers.controller('PagesController', [ '$scope', '$location',
+controllers.controller('ProducersController', [ '$scope', '$location',
 	($scope, $location) ->
 ])

@@ -20,6 +20,11 @@ wineDB.config([ '$routeProvider',
 			.when('/',
 				templateUrl: 'pages/index.html'
 				controller: 'PagesController'
+			).when('/producers',
+				templateUrl: 'producers/index.html'
+				controller: 'ProducersController'
+			).otherwise(
+				redirectTo: '/'
 			)
 ])
 

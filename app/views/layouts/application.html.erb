@@ -12,8 +12,8 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
-    <nav class="navbar navbar-default" role="navigation">
+  <body ng-app="wineDB">
+    <nav class="navbar navbar-default" role="navigation" ng-controller="NavigationController">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#primary-navbar-collapse">
@@ -22,16 +22,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to 'WineDB', root_path, class: 'navbar-brand' %>
+          <a href ng-click="rootPath()" class="navbar-brand">WineDB</a>
         </div>
 
         <div class="collapse navbar-collapse" id="primary-navbar-collapse">
           <ul class="nav navbar-nav">
-            <% if request.path == root_path %>
-              <li class="active"><%= link_to 'Home', root_path %></li>
-            <% else %>
-              <li><%= link_to 'Home', root_path %></li>
-            <% end %>
+            <li ng-class="{ active: isActiveExact('/') }">
+              <a href ng-click="rootPath()">WineDB</a>
+            </li>
 
             <% if request.path == lwin_identifiers_path %>
               <li class="active"><%= link_to 'Identifiers', lwin_identifiers_path %></li>
@@ -45,11 +43,9 @@
               <li><%= link_to 'Wines', wines_path %></li>
             <% end %>
 
-            <% if request.path == producers_path %>
-              <li class="active"><%= link_to 'Producers', producers_path %></li>
-            <% else %>
-              <li><%= link_to 'Producers', producers_path %></li>
-            <% end %>
+            <li ng-class="{ active: isActive('/producers') }">
+              <a href ng-click="producersPath()">Producers</a>
+            </li>
 
             <% if request.path == classifications_path %>
               <li class="active"><%= link_to 'Classifications', classifications_path %></li>
