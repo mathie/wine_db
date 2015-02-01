@@ -16,6 +16,9 @@ controllers.controller('ProducersController', [ '$scope', '$routeParams', '$loca
 			$scope.producers = results
 		)
 
+		$scope.showProducer = (producer) ->
+			$location.url("/producers/#{producer.id}")
+
 		$scope.hasPreviousPage = ->
 			$scope.page != 1
 

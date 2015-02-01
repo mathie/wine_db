@@ -1,0 +1,24 @@
+<hgroup class="page-header">
+  <h1>{{ producer.name }}</h1>
+</hgroup>
+
+<ol class="breadcrumb" ng-controller="NavigationController">
+  <li>
+    <a href ng-click="rootPath()">Home</a>
+  </li>
+  <li><a href ng-click="producersPath()">Producers</a></li>
+  <li class="active">{{ producer.name }}</li>
+</ol>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href ng-click="producerPath(producer)">Details</a></li>
+  <li><a href ng-click="winesPath(producer)">Wines</a></li>
+</ul>
+
+<dl>
+  <dt>Name</dt>
+  <dd>{{ producer.name }}</dd>
+
+  <dt>Number of wines</dt>
+  <dd>{{ producer.number_of_wines }}</dd>
+</dl>
