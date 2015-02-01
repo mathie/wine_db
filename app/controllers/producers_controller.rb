@@ -11,7 +11,7 @@ class ProducersController < ApplicationController
   def scope
     scope = Producer
 
-    if query = params[:q]
+    if query = params[:query]
       scope.search(query)
     else
       scope

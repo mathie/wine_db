@@ -11,11 +11,11 @@
 
 <form class="form-inline text-center" role="form" method="get">
   <div class="form-group">
-    <label for="q" class="sr-only">Query</label>
-    <input type="search" name="q" class="form-control" placeholder="Enter a search term...">
+    <label for="query" class="sr-only">Query</label>
+    <input type="search" autofocus ng-model="query" name="query" class="form-control" placeholder="Enter a search term...">
   </div>
 
-  <input type="submit" class="btn btn-primary" value="Search">
+  <button class="btn btn-primary" ng-click="search(query)">Search</button>
 </form>
 <hr>
 

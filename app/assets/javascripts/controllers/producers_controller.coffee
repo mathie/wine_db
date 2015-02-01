@@ -7,14 +7,22 @@ controllers.controller('ProducersController', [ '$scope', '$routeParams', '$loca
 		else
 			$scope.page = 1
 
+		if $routeParams.query
+			$scope.query = $routeParams.query
+		else
+			$scope.query = null
+
 		Producer = $resource('/producers/:producerId',
 			recipeId: '@id',
 			format: 'json'
 		)
 
-		Producer.query(page: $scope.page, (results) ->
+		Producer.query(query: $scope.query, page: $scope.page, (results) ->
 			$scope.producers = results
 		)
+
+		$scope.search = (query) ->
+			$location.url('/producers').search(query: query)
 
 		$scope.showProducer = (producer) ->
 			$location.url("/producers/#{producer.id}")
@@ -30,13 +38,13 @@ controllers.controller('ProducersController', [ '$scope', '$routeParams', '$loca
 
 		$scope.nextPage = ->
 			if $scope.hasNextPage()
-				$location.search(page: $scope.page + 1)
+				$location.search(query: $scope.query, page: $scope.page + 1)
 			else
 				console.log('No next page. Current page = ' + $scope.page)
 
 		$scope.previousPage = ->
 			if $scope.hasPreviousPage()
-				$location.search(page: $scope.page - 1)
+				$location.search(query: $scope.query, page: $scope.page - 1)
 			else
 				console.log('No previous page. Current page = ' + $scope.page)
 ])
