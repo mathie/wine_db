@@ -13,4 +13,7 @@ controllers.controller('NavigationController', [ '$scope', '$location',
 
 		$scope.producersPath = ->
 			$location.url('/producers')
+
+		$scope.locationsPath = ->
+			$location.url('/locations')
 ])

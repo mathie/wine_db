@@ -53,11 +53,9 @@
               <li><%= link_to 'Classifications', classifications_path %></li>
             <% end %>
 
-            <% if request.path == locations_path %>
-              <li class="active"><%= link_to 'Locations', locations_path %></li>
-            <% else %>
-              <li><%= link_to 'Locations', locations_path %></li>
-            <% end %>
+            <li ng-class="{ active: isActive('/locations') }">
+              <a href ng-click="locationsPath()">Locations</a>
+            </li>
           </ul>
         </div>
       </div>

@@ -13,13 +13,14 @@ class LocationsController < ApplicationController
       @location = Location.find(location_id)
       @location.children
     else
-      Location.where(parent_id: nil)
+      scope = Location
     end
 
-    if query = params[:q]
+    if query = params[:query]
       scope.search(query)
     else
-      scope
+      # No parent scope, and no query, so just show top level locations.
+      scope.where(parent_id: nil)
     end
   end
 end
