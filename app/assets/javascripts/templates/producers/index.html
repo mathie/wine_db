@@ -19,6 +19,22 @@
 </form>
 <hr>
 
+<nav>
+  <ul class="pager">
+    <li class="previous" ng-class="{ disabled: !hasPreviousPage() }">
+      <a href ng-click="previousPage()">
+        <span aria-hidden="true">&larr;</span> Previous
+      </a>
+    </li>
+
+    <li class="next" ng-class="{ disabled: !hasNextPage() }">
+      <a href ng-click="nextPage()">
+        Next <span aria-hidden="true">&rarr;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
@@ -28,5 +44,9 @@
   </thead>
 
   <tbody>
+    <tr ng-repeat="producer in producers">
+      <td><a href ng-click="showProducer(producer)">{{ producer.name }}</a></td>
+      <td>{{ producer.number_of_wines }}</td>
+    </tr>
   </tbody>
 </table>

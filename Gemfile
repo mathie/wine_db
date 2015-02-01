@@ -16,6 +16,7 @@ gem 'angular-rails-templates'
 
 gem 'spreadsheet'
 gem 'kaminari'
+gem 'jbuilder'
 
 group :development, :test do
   gem 'spring'

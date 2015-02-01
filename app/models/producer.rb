@@ -8,4 +8,8 @@ class Producer < ActiveRecord::Base
   def self.paginated(page)
     order(:name).page(page)
   end
+
+  def number_of_wines
+    wines.count
+  end
 end
